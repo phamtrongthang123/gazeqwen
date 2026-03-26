@@ -19,6 +19,8 @@ pipeline_tag: video-text-to-text
 
 **Gaze-conditioned video understanding with Qwen2.5-VL-7B.**
 
+**Code**: [github.com/phamtrongthang123/gazeqwen](https://github.com/phamtrongthang123/gazeqwen)
+
 GazeQwen injects eye-tracking scanpath information into a frozen Qwen2.5-VL-7B model via lightweight hook-based residual injection, enabling the VLM to leverage human gaze patterns for video QA tasks.
 
 ## Model Details
