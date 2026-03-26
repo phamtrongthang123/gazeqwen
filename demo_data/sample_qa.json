@@ -1,0 +1,20 @@
+[
+  {
+    "video_path": "OP03-R01-PastaSalad.mp4",
+    "response_time": "[03:36 - 04:36]",
+    "questions": [
+      {
+        "question": "Which object is the user currently gazing at?",
+        "time_stamp": "04:36",
+        "answer": "C",
+        "options": [
+          "A. box",
+          "B. spices",
+          "C. knife",
+          "D. jar"
+        ],
+        "task_type": "present_object_identification_easy"
+      }
+    ]
+  }
+]

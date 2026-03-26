@@ -44,19 +44,24 @@ def main():
     # ---- Built-in example if no args ----
     if args.video is None:
         project_root = os.path.dirname(os.path.abspath(__file__))
-        parent = os.path.dirname(project_root)
-        args.video = os.path.join(parent, "dataset/videos/original_video/OP03-R01-PastaSalad.mp4")
-        args.fixation = os.path.join(
-            parent, "pipeline/final_data/egtea/metadata",
-            "OP03-R01-PastaSalad/OP03-R01-PastaSalad_fixation_filtered.csv",
-        )
-        args.checkpoint = os.path.join(parent, "checkpoints/gazelens_v2/best_model.pt")
-        args.vjepa_checkpoint = os.path.join(parent, "checkpoints/vjepa2_1_vitb_dist_vitG_384.pt")
+        demo_data = os.path.join(project_root, "demo_data")
+        args.video = os.path.join(demo_data, "OP03-R01-PastaSalad.mp4")
+        args.fixation = os.path.join(demo_data, "OP03-R01-PastaSalad_fixation_filtered.csv")
+        args.checkpoint = os.path.join(project_root, "checkpoints", "gazeqwen", "best_model.pt")
+        args.vjepa_checkpoint = os.path.join(project_root, "checkpoints", "vjepa2_1_vitb_dist_vitG_384.pt")
         args.question = "Which object is the user currently gazing at?"
         args.options = ["A. box", "B. spices", "C. knife", "D. jar"]
         args.time = 276.0  # 04:36
         args.answer = "C"
         logger.info("No arguments given — using built-in example")
+        if not os.path.exists(args.video):
+            logger.error(
+                "Demo video not found: %s\n"
+                "Download it to demo_data/OP03-R01-PastaSalad.mp4\n"
+                "(EGTEA Gaze+ dataset: http://cbs.ic.gatech.edu/fpv/)",
+                args.video,
+            )
+            sys.exit(1)
 
     assert os.path.exists(args.video), f"Video not found: {args.video}"
     assert os.path.exists(args.checkpoint), f"Checkpoint not found: {args.checkpoint}"

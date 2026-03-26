@@ -29,12 +29,30 @@ huggingface-cli download phamtrongthang/gazeqwen best_model.pt --local-dir check
 
 ## Quick Demo
 
+### 1. Prepare demo data
+
+The repo includes a sample fixation CSV and QA JSON in `demo_data/`.
+You only need to supply a video file and the checkpoints:
+
 ```bash
-# Run built-in example (OI-Easy task, outputs prediction with confidence)
+# Download EGTEA Gaze+ video (from http://cbs.ic.gatech.edu/fpv/)
+# Place as: demo_data/OP03-R01-PastaSalad.mp4
+
+# Download checkpoints
+mkdir -p checkpoints/gazeqwen
+huggingface-cli download phamtrongthang/gazeqwen best_model.pt --local-dir checkpoints/gazeqwen
+wget https://dl.fbaipublicfiles.com/vjepa2/vjepa2_1_vitb_dist_vitG_384.pt -P checkpoints/
+```
+
+### 2. Run
+
+```bash
 export PYTHONPATH=".:third_party/vjepa2"
+
+# Built-in example (uses demo_data/ fixation + QA)
 python demo.py
 
-# Run on your own sample
+# Your own sample
 python demo.py \
     --video /path/to/video.mp4 \
     --fixation /path/to/video_fixation_filtered.csv \
@@ -44,7 +62,8 @@ python demo.py \
     --time 276.0 --answer C
 ```
 
-Example output:
+### Example output
+
 ```
 Video:    OP03-R01-PastaSalad.mp4
 Clip:     [216s - 276s]
@@ -58,6 +77,13 @@ Question: Which object is the user currently gazing at?
 Prediction: C (confidence: 92.7%)
 Ground truth: C  CORRECT
 ```
+
+### Demo data contents
+
+| File | Description |
+|------|-------------|
+| `demo_data/sample_qa.json` | Sample QA entry (OI-Easy task) |
+| `demo_data/OP03-R01-PastaSalad_fixation_filtered.csv` | Eye-tracking fixations (36 fixations, ~12 min video) |
 
 ## Inference (Python API)
 
