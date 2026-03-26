@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.out
+.vscode/
+.idea/
+.DS_Store
+
+# Data and outputs (download separately)
+dataset/
+results/
+checkpoints/
+slurm_logs/
