@@ -23,8 +23,8 @@ pip install -r requirements.txt
 mkdir -p checkpoints
 wget https://dl.fbaipublicfiles.com/vjepa2/vjepa2_1_vitb_dist_vitG_384.pt -P checkpoints/
 
-# Download GazeQwen checkpoint from HuggingFace
-# TODO: Add HuggingFace link
+# Download GazeQwen checkpoint from HuggingFace (51MB)
+huggingface-cli download phamtrongthang/gazeqwen best_model.pt --local-dir checkpoints/gazeqwen
 ```
 
 ## Inference
@@ -47,9 +47,9 @@ model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
 processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
 
 # 2. Load GazeQwen checkpoint
-checkpoint = torch.load("checkpoints/gazeqwen/best_model.pt", map_location="cpu")
-f_theta = GazeLens(**checkpoint.get("f_theta_config", {}))
-f_theta.load_state_dict(checkpoint["f_theta_state_dict"])
+checkpoint = torch.load("checkpoints/gazeqwen/best_model.pt", map_location="cpu", weights_only=False)
+f_theta = GazeLens(**checkpoint["config"])
+f_theta.load_state_dict(checkpoint["state_dict"])
 
 # 3. Apply LoRA and load weights
 lora_config = checkpoint.get("lora_config", {"rank": 8, "alpha": 16.0})
