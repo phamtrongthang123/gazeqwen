@@ -153,13 +153,3 @@ Statistically significant improvement on 7 out of 10 tasks (McNemar test, p<0.05
 
 Apache-2.0
 
-## Citation
-
-```bibtex
-@software{gazeqwen2026,
-  title={GazeQwen: Gaze-Conditioned Video Understanding with Qwen2.5-VL},
-  author={Pham, Trong Thang},
-  year={2026},
-  url={https://huggingface.co/phamtrongthang/gazeqwen}
-}
-```
