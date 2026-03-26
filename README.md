@@ -27,7 +27,39 @@ wget https://dl.fbaipublicfiles.com/vjepa2/vjepa2_1_vitb_dist_vitG_384.pt -P che
 huggingface-cli download phamtrongthang/gazeqwen best_model.pt --local-dir checkpoints/gazeqwen
 ```
 
-## Inference
+## Quick Demo
+
+```bash
+# Run built-in example (OI-Easy task, outputs prediction with confidence)
+export PYTHONPATH=".:third_party/vjepa2"
+python demo.py
+
+# Run on your own sample
+python demo.py \
+    --video /path/to/video.mp4 \
+    --fixation /path/to/video_fixation_filtered.csv \
+    --checkpoint checkpoints/gazeqwen/best_model.pt \
+    --question "Which object is the user currently gazing at?" \
+    --options "A. box" "B. spices" "C. knife" "D. jar" \
+    --time 276.0 --answer C
+```
+
+Example output:
+```
+Video:    OP03-R01-PastaSalad.mp4
+Clip:     [216s - 276s]
+Gaze:     5 fixations
+Question: Which object is the user currently gazing at?
+       A. box
+       B. spices
+   >>> C. knife
+       D. jar
+
+Prediction: C (confidence: 92.7%)
+Ground truth: C  CORRECT
+```
+
+## Inference (Python API)
 
 ```python
 import torch
